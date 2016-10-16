@@ -112,7 +112,7 @@ for sam in range(1,dynp_sam+1):
             dyn_ocp[pos_ocp] = dyn_ocp[dyn_voc]
         else: # Try to infect
             # Select an infected vertex and accept with the probability.
-            while True
+            while True:
                 pos_ocp = np.random.randint(0,dyn_voc)
                 ver = dyn_ocp[pos_ocp]
                 if np.random.uniform() < 1.0*netw.k[ver] / (1.0*net_kmax):
