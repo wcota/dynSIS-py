@@ -27,8 +27,9 @@
 # !-----------------------------------------------------------------------------
 # ! See README.md for more details
 # ! This code is available at <https://github.com/wcota/dynSIS-py>
+# ! For performance, see <https://github.com/wcota/dynSIS> (Fortran implementation)
 
-import numpy
+import numpy as np
 from tools import *
 
 # Defining a network object
@@ -64,9 +65,9 @@ def readEdges(fname):
             
     # Now let's build the adjacency list. Numpy is used to use less memory.
     print_info('Building the adjacency list...')
-    netw.k = numpy.zeros(netw.size, numpy.int)
-    netw.ini = numpy.zeros(netw.size, numpy.int)
-    netw.con = numpy.zeros(netw.skk, numpy.int)
+    netw.k = np.zeros(netw.size, np.int)
+    netw.ini = np.zeros(netw.size, np.int)
+    netw.con = np.zeros(netw.skk, np.int)
     
     pos = 0
     print_info('Calculating degrees...')
@@ -80,7 +81,7 @@ def readEdges(fname):
             
     # Now we read again the tmp_con and save data (reindex! Nodes begin at zero)
     print_info('Connecting edges...')
-    tmp_pos = numpy.copy(netw.ini)
+    tmp_pos = np.copy(netw.ini)
     for x,y in tmp_con:
         netw.con[tmp_pos[x-1]] = y - 1
         tmp_pos[x-1] += 1

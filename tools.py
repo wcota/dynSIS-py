@@ -27,6 +27,7 @@
 # !-----------------------------------------------------------------------------
 # ! See README.md for more details
 # ! This code is available at <https://github.com/wcota/dynSIS-py>
+# ! For performance, see <https://github.com/wcota/dynSIS> (Fortran implementation)
 
 # Print functions
 def print_error(st):
@@ -36,9 +37,6 @@ def print_info(st,nl=False):
     if nl:
         print('')
     print('$!', st, '!$')
-
-def print_progress(st):
-    pass
     
 def print_header():
     print(  '###############################################################################',

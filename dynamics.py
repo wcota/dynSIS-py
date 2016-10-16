@@ -26,6 +26,7 @@
 # !-----------------------------------------------------------------------------
 # ! See README.md for more details
 # ! This code is available at <https://github.com/wcota/dynSIS-py>
+# ! For performance, see <https://github.com/wcota/dynSIS> (Fortran implementation)
 
 from network import *
 from tools import *
@@ -58,12 +59,12 @@ print_info('Everything ok!')
 
 # PREPARING THE NECESSARY THINGS
 net_kmax = max(netw.k)
-avg_rho = numpy.zeros(dynp_tmax, numpy.float64)
-avg_t = numpy.zeros(dynp_tmax, numpy.float64)
-avg_sam = numpy.zeros(dynp_tmax, numpy.int)
+avg_rho = np.zeros(dynp_tmax, np.float64)
+avg_t = np.zeros(dynp_tmax, np.float64)
+avg_sam = np.zeros(dynp_tmax, np.int)
 
-dyn_ocp = numpy.zeros(netw.size, numpy.int)
-dyn_sig = numpy.zeros(netw.size, numpy.int)
+dyn_ocp = np.zeros(netw.size, np.int)
+dyn_sig = np.zeros(netw.size, np.int)
 # / PREPARING THE NECESSARY THINGS
 
 # RUNNING DYNAMICS
@@ -80,15 +81,14 @@ for sam in range(1,dynp_sam+1):
     dyn_voc = 0
     dyn_sk = 0
     for i in range(0, int(netw.size*dynp_pINI)):
-        isOk = False
-        while not isOk:
-            ver = numpy.random.randint(0,netw.size)
+        while True:
+            ver = np.random.randint(0,netw.size)
             if dyn_sig[ver] == 0:
                 dyn_ocp[dyn_voc] = ver
                 dyn_voc += 1
                 dyn_sig[ver] = 1
                 dyn_sk += netw.k[ver]
-                isOk = True
+                break
     
     # RUN, Forest, RUN!
     dyn_t = 0
@@ -96,14 +96,13 @@ for sam in range(1,dynp_sam+1):
     dyn_dt_pos = 1
     
     print_info('Running...')
-    # SIS II ALGORITHM
     while dyn_t <= dynp_tmax and dyn_voc > 0:
+        # SIS II ALGORITHM
         dyn_p = 1.0*dyn_voc / (dyn_voc + 1.0*dynp_lb * dyn_sk)
-        rnd = numpy.random.uniform()
         
-        if rnd < dyn_p: # Cure
+        if np.random.uniform() < dyn_p: # Cure
             # Select a random occupied vertex and heal.
-            pos_ocp = numpy.random.randint(0,dyn_voc)
+            pos_ocp = np.random.randint(0,dyn_voc)
             ver = dyn_ocp[pos_ocp]
                 
             # Healed
@@ -113,18 +112,17 @@ for sam in range(1,dynp_sam+1):
             dyn_ocp[pos_ocp] = dyn_ocp[dyn_voc]
         else: # Try to infect
             # Select an infected vertex and accept with the probability.
-            isOk = False
-            while not isOk:
-                pos_ocp = numpy.random.randint(0,dyn_voc)
+            while True
+                pos_ocp = np.random.randint(0,dyn_voc)
                 ver = dyn_ocp[pos_ocp]
-                if numpy.random.uniform() < 1.0*netw.k[ver] / (1.0*net_kmax):
-                    isOk = True
+                if np.random.uniform() < 1.0*netw.k[ver] / (1.0*net_kmax):
+                    break
             
             # Select one of its neighbors
-            pos_nei = numpy.random.randint(netw.ini[ver], netw.ini[ver] + netw.k[ver])
+            pos_nei = np.random.randint(netw.ini[ver], netw.ini[ver] + netw.k[ver])
             ver = netw.con[pos_nei]
             
-            if dyn_sig[ver] == 0:
+            if dyn_sig[ver] == 0: # Infect!
                 dyn_sig[ver] = 1
                 dyn_sk += netw.k[ver]
                 dyn_ocp[dyn_voc] = ver
@@ -134,7 +132,7 @@ for sam in range(1,dynp_sam+1):
             dyn_dt = 1.0/(dyn_voc + 1.0*dynp_lb * (1.0*dyn_sk))
             dyn_t += dyn_dt
             
-            while (dyn_t >= dyn_dt_pos):
+            while (dyn_t >= dyn_dt_pos): # Save data
                 dyn_dt_pos_max = max(dyn_dt_pos,dyn_dt_pos_max)
                 avg_rho[dyn_dt_pos - 1] += 1.0*dyn_voc/netw.size
                 avg_t[dyn_dt_pos - 1] += dyn_t
