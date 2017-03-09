@@ -6,7 +6,7 @@
 
 [Fortran implementation - for performance](https://github.com/wcota/dynSIS)
 
-[Python implementation - learn and use](https://github.com/wcota/dynSIS-py)
+[(this) Python implementation - learn and use](https://github.com/wcota/dynSIS-py)
 
 [NetworkX Python implementation - range of options](https://github.com/wcota/dynSIS-networkx)
 
@@ -18,7 +18,7 @@ For performance, see https://github.com/wcota/dynSIS (Fortran implementation)
 
 ## Dataset input
 
-You need provide a file containing the list of edges (__in__ and __out__, two collumns). ID of the vertices must be enumerated sequentially as `1, 2, 3,..., N`, where `N` is the total number of vertices of the network. Here, we assume  __undirected__ and __unweighted__ networks without multiple neither self connections.
+You need to provide a file containing the list of edges (__in__ and __out__, two collumns). ID of the vertices must be enumerated sequentially as `1, 2, 3,..., N`, where `N` is the total number of vertices of the network. Here, we assume  __undirected__ and __unweighted__ networks without multiple neither self connections.
 
 Consider, for example, a network with `N=5` vertices represented by:
 
@@ -34,7 +34,7 @@ Examples of datasets and their specifications are available at http://goo.gl/Bm3
 
 ## Installation
 
-Python 3 is required, and also the numpy library.
+Python 3 is required, and also the [NumPy](http://www.numpy.org/) library.
 
 ## Use
 
@@ -42,7 +42,7 @@ If you want to manually input the dynamical parameters, just type:
 
 ```python dynamics.py <edges_file> <output_file>```
 
-where ``<output_file>`` will be written with the average of the fraction of infected vertices versus time.
+where ``<output_file>`` will be written with the average infected vertices density versus time.
 
 Alternatively, use (Linux):
 
