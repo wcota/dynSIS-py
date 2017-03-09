@@ -6,7 +6,7 @@
 
 [Fortran implementation - for performance](https://github.com/wcota/dynSIS)
 
-[(this) Python implementation - learn and use](https://github.com/wcota/dynSIS-py)
+(this) [Python implementation - learn and use](https://github.com/wcota/dynSIS-py)
 
 [NetworkX Python implementation - range of options](https://github.com/wcota/dynSIS-networkx)
 
