@@ -51,7 +51,8 @@ print_info('Reading dynamical parameters...')
 dynp_sam = int(input('How much dynamics samples? '))
 dynp_lb = float(input('Value of infection rate lambda (mu is defined as equal to 1): '))
 dynp_tmax = int(input('Maximum time steps (it stops if the absorbing state is reached): '))
-dynp_pINI = float(input('Fraction of infected vertices on the network as initial condition (is random to each sample): '))
+dynp_pINI = float(input('Fraction of infected vertices on the network as initial condition (is random \
+for each sample): '))
 # / READING PARAMETERS
 
 # LOADING NETWORK
@@ -174,7 +175,8 @@ for sam in range(1,dynp_sam+1):
     for dt_pos in range(0,dyn_dt_pos_max):
         print(1.0*avg_t[dt_pos]/avg_sam[dt_pos], 1.0*avg_rho[dt_pos]/(1.0*sam),
                 file=flOutput)
-        # If you use /avg_samSurv[dt_pos] instead of /(1.0*sam) to write avg_rho (2nd column), you have QS analysis :)
+        # If you use /avg_samSurv[dt_pos] instead of /(1.0*sam) to write avg_rho (2nd column), you have 
+        # QS analysis :)
                 
     flOutput.close()
 # / RUNNING DYNAMICS
