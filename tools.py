@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # ! ## File: tools.py
 # ! ## Print and read functions.
-# ! ## See README.md for more information and use
-# !-----------------------------------------------------------------------------
+# ! ## See README.md for more information and use# !-----------------------------------------------------------------------------
 # ! SIS epidemic model algorithm based on the article 
-# !           "Optimized Gillespie algorithms for the efficient simulation of 
-# !            Markovian epidemic processes on large and heterogeneous networks"
+# !           "Optimized Gillespie algorithms for the simulation of Markovian
+# !            epidemic processes on large and heterogeneous networks"
 # ! Copyright (C) 2017 Wesley Cota, Silvio C. Ferreira
 # ! 
-# ! Please cite the above cited paper as reference to our code.
+# ! Please cite the above cited paper (available at <http://wesleycota.com/ ) as reference
+# ! to our code.
 # ! 
 # !    This program is free software: you can redistribute it and/or modify
 # !    it under the terms of the GNU General Public License as published by
@@ -25,8 +25,8 @@
 # !-----------------------------------------------------------------------------
 # ! Author    : Wesley Cota
 # ! Email     : wesley.cota@ufv.br
-# ! Date      : 10 Mar 2017
-# ! Version   : 0.2
+# ! Date      : 27 Mar 2017
+# ! Version   : 1.0
 # !-----------------------------------------------------------------------------
 # ! See README.md for more details
 # ! This code is available at <https://github.com/wcota/dynSIS-py>
@@ -40,18 +40,5 @@ def print_error(st):
 def print_info(st,nl=False):
     if nl:
         print('')
-    print('$!', st, '!$')
+    print('$!', st)
     
-def print_header():
-    
-    
-    print(  '################################################################################',
-            '### Optimized Gillespie algorithms for the efficient simulation of Markovian ###',
-            '####### epidemic processes on large and heterogeneous networks: SIS-OGA. #######',
-            '##============ Copyright (C) 2017 Wesley Cota, Silvio C. Ferreira ============##',
-            '##======= This code is available at <https://github.com/wcota/dynSIS>. =======##',
-            '##======== Please cite the above cited paper as reference to our code ========##',
-            '##=== This code is under GNU General Public License. Please see README.md. ===##',
-            '################################################################################',
-            '',
-            sep='\n')

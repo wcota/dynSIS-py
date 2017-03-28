@@ -3,11 +3,12 @@
 # ! ## See README.md for more information and use
 # !-----------------------------------------------------------------------------
 # ! SIS epidemic model algorithm based on the article 
-# !           "Optimized Gillespie algorithms for the efficient simulation of 
-# !            Markovian epidemic processes on large and heterogeneous networks"
+# !           "Optimized Gillespie algorithms for the simulation of Markovian
+# !            epidemic processes on large and heterogeneous networks"
 # ! Copyright (C) 2017 Wesley Cota, Silvio C. Ferreira
 # ! 
-# ! Please cite the above cited paper as reference to our code.
+# ! Please cite the above cited paper (available at <http://wesleycota.com/ ) as reference
+# ! to our code.
 # ! 
 # !    This program is free software: you can redistribute it and/or modify
 # !    it under the terms of the GNU General Public License as published by
@@ -24,8 +25,8 @@
 # !-----------------------------------------------------------------------------
 # ! Author    : Wesley Cota
 # ! Email     : wesley.cota@ufv.br
-# ! Date      : 10 Mar 2017
-# ! Version   : 0.2
+# ! Date      : 27 Mar 2017
+# ! Version   : 1.0
 # !-----------------------------------------------------------------------------
 # ! See README.md for more details
 # ! This code is available at <https://github.com/wcota/dynSIS-py>
@@ -37,7 +38,17 @@ from tools import *
 from math import log
 import sys
 
-print_header()
+print(  '################################################################################',
+        '######### Optimized Gillespie algorithms for the simulation of Markovian  ######',
+        '####### epidemic processes on large and heterogeneous networks: SIS-OGA. #######',
+        '##============ Copyright (C) 2017 Wesley Cota, Silvio C. Ferreira ============##',
+        '##================ Paper available at <http://wesleycota.com/ ================##',
+        '##======= The codes are available at <https://github.com/wcota/dynSIS> =======##',
+        '##======== Please cite the above cited paper as reference to our code ========##',
+        '##=== This code is under GNU General Public License. Please see README.md. ===##',
+        '################################################################################',
+        '',
+        sep='\n')
 
 # READING PARAMETERS
 if len(sys.argv) < 3:
@@ -162,7 +173,8 @@ for sam in range(1,dynp_sam+1):
     
     # Write output file
     flOutput = open(fnOutput, 'wt')
-    print(  '#@ Network file: '+fnInput,
+    print(  '## ***** Algorithm used: Optimized Gillespie Algorithm for SIS (SIS-OGA, Python) *****',
+            '#@ Network file: '+fnInput,
             '#@ Number of nodes: '+str(netw.size),
             '#@ Number of edges: '+str(netw.skk),
             '#@ Samples: '+str(dynp_sam),
@@ -181,6 +193,10 @@ for sam in range(1,dynp_sam+1):
     flOutput.close()
 # / RUNNING DYNAMICS
 
+print_info('')
 print_info('Everything ok!',True)
 print_info('Input file (edges list): '+ fnInput)
 print_info('Output file: '+ fnOutput)
+print_info('')
+print_info('*****Algorithm used: Optimized Gillespie Algorithm for SIS (SIS-OGA, Python)*****')
+print_info('Codes available at <https://github.com/wcota/dynSIS>.')
