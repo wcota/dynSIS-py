@@ -62,7 +62,7 @@ def readEdges(fname):
             if li[0] == li[1]:
                 print_error('Self-connection found! Verify your data.')
             if li[0] < 1 or li[1] < 1:
-                print_error('Vertex id MUST be >= 1. Verifiy your data.')
+                print_error('Vertex id MUST be >= 1. Verify your data.')
             
             netw.size = max(netw.size, li[0], li[1])
             tmp_con.append(li)
